@@ -26,7 +26,7 @@ export default function ExperimentDetail() {
 
   return (
     <div className="expDetailbg ">
-      <div className="experiment-detail-container bg-gray-100 rounded-2xl">
+      <div className="experiment-detail-container bg-gray-200 rounded-2xl">
        
         {/* Header */}
         <div className="experiment-header">
@@ -43,12 +43,22 @@ export default function ExperimentDetail() {
           {/* Materials */}
           <section className="experiment-section">
             <h2>Materials Required</h2>
-            <ul className="materials-list flex justify-between g-4 ">
+            <ul className="materials-list flex flex-wrap gap-4">
               {(exp.materials || []).map((m, i) => (
-                <li key={i}>{m}</li>
+                <li key={i} className='basis-1/5 max-w-1/5'>{m}</li>
               ))}
             </ul>
           </section>
+
+          {/* Theory  */}
+         <section>
+          <div className='experiment-section'>
+           <h2 >Theory</h2>
+          <div className=''>
+            <p>{exp.theory  }</p>
+          </div>
+          </div>
+         </section>
 
           {/* Procedure */}
           <section className="experiment-section">
@@ -71,12 +81,12 @@ export default function ExperimentDetail() {
           )}
 
           {/* Data Table */}
-          {exp.results?.dataTable && (
+          {/* exp.results?.dataTable && (
             <section className="experiment-section">
               <h2>Data Table</h2>
               <pre>{JSON.stringify(exp.results.dataTable, null, 2)}</pre>
             </section>
-          )}
+          ) */}
 
           {/* Observation Table */}
           {exp.results?.observationTable && (
@@ -87,12 +97,13 @@ export default function ExperimentDetail() {
           )}
 
           {/* Calculations */}
-          {exp.results?.calculations && (
+          {/* {exp.results?.calculations && ( */}
             <section className="experiment-section">
               <h2>Calculations</h2>
               <p>{exp.results.calculations}</p>
             </section>
-          )}
+          
+           {/* )} */}
 
           {/* Safety Notes */}
           {exp.safetyNotes && (
