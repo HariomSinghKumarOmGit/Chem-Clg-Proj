@@ -5,10 +5,9 @@ import ChatBot from '../components/ChatBot';
 import '../styles/ExperimentDetail.css';
 import ObservationTable from './ObservatinTable';
 
-
 const defaultObservationTable = {
   columns: [
-    { name: "Sno",  },
+    { name: "Sno" },
     { name: "Initial Observation", type: "number" },
     { name: "Final Observation", type: "number" },
     { name: "Net Volume", type: "text" },
@@ -41,15 +40,15 @@ export default function ExperimentDetail() {
   return (
     <div className="expDetailbg ">
       <div className="experiment-detail-container bg-gray-200 rounded-2xl">
-       
         {/* Header */}
         <div className="experiment-header">
           <h1>{exp.title}</h1>
           <p className="experiment-category">{exp.category || 'General Chemistry'}</p>
         </div>
-        <div className=" bg-gray-50 p-4 rounded-2xl">
+
+        <div className="bg-gray-50 p-4 rounded-2xl">
           {/* Objective */}
-          <section className="experiment-section " >
+          <section className="experiment-section">
             <h2>Objective</h2>
             <p>{exp.objective}</p>
           </section>
@@ -59,20 +58,22 @@ export default function ExperimentDetail() {
             <h2>Materials Required</h2>
             <ul className="materials-list flex flex-wrap gap-4">
               {(exp.materials || []).map((m, i) => (
-                <li key={i} className='basis-1/5 max-w-1/5'>{m}</li>
+                <li key={i} className="basis-1/5 max-w-1/5">
+                  {m}
+                </li>
               ))}
             </ul>
           </section>
 
-          {/* Theory  */}
-         <section>
-          <div className='experiment-section'>
-           <h2 >Theory</h2>
-          <div className=''>
-            <p>{exp.theory  }</p>
-          </div>
-          </div>
-         </section>
+          {/* Theory */}
+          <section>
+            <div className="experiment-section">
+              <h2>Theory</h2>
+              <div>
+                <p>{exp.theory}</p>
+              </div>
+            </div>
+          </section>
 
           {/* Procedure */}
           <section className="experiment-section">
@@ -94,38 +95,31 @@ export default function ExperimentDetail() {
             </section>
           )}
 
-          {/* Data Table */}
-          {/* exp.results?.dataTable && (
-            <section className="experiment-section">
-              <h2>Data Table</h2>
-              <pre>{JSON.stringify(exp.results.dataTable, null, 2)}</pre>
-            </section>
-          ) */}
-
-            <div style={{ marginTop: "2rem" }}>
+          {/* Editable Observation Table */}
+          <div style={{ marginTop: '2rem' }}>
             <ObservationTable
               observationTable={observationTable}
               onChange={setObservationTable}
             />
           </div>
-          
-
-          {/* Observation Table */}
-          {/* {exp.results?.observationTable && (
-            <section className="experiment-section">
-              <h2>Observation Table</h2>
-              <pre>{JSON.stringify(exp.results.observationTable, null, 2)}</pre>
-            </section>
-          )} */}
 
           {/* Calculations */}
-          {/* {exp.results?.calculations && ( */}
-            <section className="experiment-section">
-              <h2>Calculations</h2>
-              <p>{exp.results.calculations}</p>
-            </section>
-          
-           {/* )} */}
+          <section className="experiment-section">
+            <h2>Calculations</h2>
+            <p>{exp.defaultResult?.calculation}</p>
+          </section>
+
+          {/* Precautions */}
+          <section className="experiment-section">
+            <h2>Precautions</h2>
+            <ol className="steps-list">
+              {(exp.precautions || []).map(step => (
+                <li key={step.stepNo}>
+                   {step.instruction}
+                </li>
+              ))}
+            </ol>
+          </section>
 
           {/* Safety Notes */}
           {exp.safetyNotes && (
@@ -140,4 +134,4 @@ export default function ExperimentDetail() {
       </div>
     </div>
   );
-}
+};

@@ -17,7 +17,7 @@ export default function ObservationTable({ observationTable, onChange }) {
 
   const handleCellChange = (rowIndex, colIndex, value) => {
     const newRows = [...(table.rows || [])];
-    const row = [...(newRows[rowIndex] || [])];
+    const row = [...(newRows[rowIndex]  || [])];
     row[colIndex] = value;
     newRows[rowIndex] = row;
 
@@ -57,7 +57,7 @@ export default function ObservationTable({ observationTable, onChange }) {
   // };
 
   const handleDeleteRow = (rowIndex) => {
-    const newRows = (table.rows || []).filter((_, i) => i !== rowIndex);
+    const newRows = (table.rows  || []).filter((_, i) => i !== rowIndex);
     const newTable = { ...table, rows: newRows };
     setTable(newTable);
     onChange?.(newTable);
@@ -123,7 +123,7 @@ export default function ObservationTable({ observationTable, onChange }) {
         </table>
       </div>
 
-      <button type="button" className=" text-purple-500 " onClick={handleAddRow}>
+      <button type="button" className=" text-purple-500 "  onClick={handleAddRow }>
         Add row
       </button>
     </div>
